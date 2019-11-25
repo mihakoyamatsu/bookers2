@@ -1,0 +1,35 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-xs-3" >
+      <table class="table table-responsive">
+        <%= render 'books/list', newbook: @newbook, user: @user %>
+      </table>
+    </div>
+
+    <div class="col-xs-9">
+      <h1>Users</h1>
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+          <th>image</th><th>name</th><th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @users.each do |user| %>
+          <tr>
+            <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format:'jpeg', fallback: "no_image.jpeg" %></td>
+            <td><%= user.name %></td>
+            <td><%=link_to "show", user_path(user.id) ,class: "btn btn-link"%></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
